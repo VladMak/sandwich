@@ -7,9 +7,13 @@ import(
 
 func main(){
 	a := decorator.ConcreteComponent{"One Concr Comp"}
-	b := decorator.BaseDecorator{a}
-	c := decorator.BaseDecorator{b.Wrappee}
-	fmt.Printf("%T\n", a)
-	fmt.Printf("%T\n", b)
-	fmt.Printf("%T\n", c)
+	b := new(decorator.ConcreteDecorator)
+	b.Wrappee = a
+	c := new(decorator.ConcreteDecorator2)
+	c.Wrappee = b.Wrappee
+	fmt.Println(a.Execute())
+	fmt.Println(b.Wrappee.Execute())
+	fmt.Println(c.Wrappee.Execute())
+	fmt.Println(b.Extra())
+	fmt.Println(c.TestFunc())
 }
